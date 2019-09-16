@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+    <li><a href="{% url 'task_add' %}">Add Article</a></li>
+{% endblock %}
+
+{% block content %}
+
+    <h1>Tasks:</h1>
+    <p><input type="submit" value=" All"></p>
+
+    <form action="{% url 'check_delete' %}" method="POST">
+    <p><input type="submit" name="all"value="del"></p>
+        {% for task in tasks %}
+            {% csrf_token %}
+            <h2>Description:{{ task.description }}</h2>
+            <div>Status:{{ task.status }}</div>
+            <p>Data:{{ task.finish_at }}</p>
+            <p><a href="{% url 'task_view' task.pk %}">More...</a></p>
+            <p><a href="{% url 'task_update' task.pk %}">Update</a></p>
+            <p><a href="{% url 'task_delete' task.pk %}">Delete</a></p>
+            <input type="checkbox" name="check" value="{{ task.pk }}">
+            <hr/>
+        {% endfor %}
+    </form>
+{% endblock %}

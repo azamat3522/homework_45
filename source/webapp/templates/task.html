@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ task.description }}{% endblock %}
+
+{% block menu %}
+     <li><a href="{% url 'task_update' task.pk %}">Edit</a></li>
+     <li><a href="{% url 'task_delete' task.pk %}">Delete</a></li>
+{% endblock %}
+
+{% block content %}
+    <h2>Description:{{ task.description }}</h2>
+    <div class="pre">Full description:{{ task.full_description }}</div>
+    <div>Status:{{ task.status }}</div>
+    <p>Data:{{ task.finish_at }}</p>
+{% endblock %}
